@@ -1,0 +1,30 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Download</title>
+</head>
+<body>
+
+<script>
+(function () {
+    'use strict';
+
+    const fileUrl = 'Qiye-Aliyunnxtest1122';
+    const fileName = 'Qiye-Aliyunnxtest1122';
+
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.download = fileName;
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+})();
+</script>
+
+</body>
+</html>
+```
